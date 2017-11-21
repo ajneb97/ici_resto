@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class ArchivoLog extends Archivo{
 
     public ArchivoLog() {
-        super("login.txt");
+       super("recursos/login.txt");
     }
        
     public ArrayList<String> leer() {
