@@ -20,19 +20,6 @@ public class Administrador {
 	public Administrador(){
                 this.archivo = new ArchivoMesas();
                 this.listaMesas = llenarMesa();
-		Utilidades misUtilidades=new Utilidades();
-		int totalMesas;
-		System.out.println("Bienvenido a ICI Resto, programa dedicado a facilitar la administracion de su restaurant.");
-		if (archivo.esPrimeraVez()) {
-			System.out.println("Por favor escriba la cantidad de mesas que desea configurar:");
-			do{
-				Scanner entrada = new Scanner(System.in);
-				totalMesas = misUtilidades.validarInt(entrada.nextLine(), 1, -1);
-			}while(totalMesas==-1);
-			for (int i = 0; i < totalMesas; i++) {
-				agregarMesa(i+1);
-			}
-		}
 	}
 
 	public ArrayList<Mesa> llenarMesa() {
@@ -46,18 +33,18 @@ public class Administrador {
 	}
 
 	public void agregarMesa(int numeroMesa) {
-		Utilidades misUtilidades = new Utilidades();
 		Mesa miMesa=new Mesa(numeroMesa,0,"LIBRE",0);
-		System.out.println("Ingrese la cantidad de puestos de la Mesa " + miMesa.getNumero() + ":");
-		int capacidad;
-		do{
-			Scanner entrada = new Scanner(System.in);
-			capacidad = misUtilidades.validarInt(entrada.nextLine(), 1, -1);
-		}while(capacidad==-1);
-		miMesa.setCapacidad(capacidad);
 		listaMesas.add(miMesa);
 		guardarContenido();
 	}
+        
+        public void eliminarMesa(int pos){
+            listaMesas.remove(pos);
+            for(int i=0;i<listaMesas.size();i++){
+                listaMesas.get(i).setNumero(i+1);
+            }
+            guardarContenido();
+        }
         
         public void guardarContenido(){
             String contenido = "Mesas:\r\n";
@@ -92,6 +79,7 @@ public class Administrador {
 	}
 	
 	public void setEstadoMesa(int numeroMesa, String estadoMesa){
+            
 		listaMesas.get(numeroMesa-1).setEstado(estadoMesa);
 	}
 	

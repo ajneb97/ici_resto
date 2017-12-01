@@ -1,12 +1,14 @@
 
 package iciresto;
 
+import gUI.Ventana;
+
 
 public class ICIResto {
 
     public static void main(String[] args) {                            
-		Menu miMenu = new Menu();
-                miMenu.login();
+		Ventana ventana = new Ventana();
+                ventana.setVisible(true);
     }
     
 }

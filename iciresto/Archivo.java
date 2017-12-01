@@ -23,7 +23,7 @@ public abstract class Archivo {
 		try {
 			texto = new String(Files.readAllBytes(getRuta()));
 		} catch (IOException e) {
-			System.err.println("Ha ocurrido un error al intentar leer el archivo.");
+			//System.err.println("Ha ocurrido un error al intentar leer el archivo.");
 			return null;
 		}
 		return texto;
@@ -38,9 +38,9 @@ public abstract class Archivo {
 		try {
 			Files.write(getRuta(), texto.getBytes());
                          
-			System.out.println("Archivo guardado correctamente");
+			//System.out.println("Archivo guardado correctamente");
 		} catch (IOException e) {
-			System.out.println("Error al intentar crear el archivo");
+			//System.out.println("Error al intentar crear el archivo");
 		}
 	}
 	
