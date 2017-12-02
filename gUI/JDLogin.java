@@ -21,7 +21,7 @@ import javax.swing.JTextField;
 
 public class JDLogin extends JDialog implements ActionListener {
 	
-	private final JPanel contentPanel = new JPanel();
+	private final JPanel contentPanel;
 	private JTextField textField;
 	private JPasswordField textField_1;
 	private JButton btnIngresar;
@@ -29,6 +29,7 @@ public class JDLogin extends JDialog implements ActionListener {
 
 	public JDLogin(Ventana ventana, boolean b) {
 		super(ventana, b);
+		this.contentPanel = new JPanel();
 		this.ventanaPrincipal = ventana;
 		setResizable(false);
 		setTitle("Login");
