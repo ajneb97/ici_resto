@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class ArchivoMesas extends Archivo{
 
     public ArchivoMesas() {
-        super("mesas.txt");
+        super("src/recursos/mesas.txt");
     }  
         
     @Override
