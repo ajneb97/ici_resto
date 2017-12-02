@@ -1,33 +1,23 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package iciresto;
 
 import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.Scanner;
 
-/**
- *
- * @author Usuario
- */
+import archivos.ArchivoMesas;
+
 public class Administrador {
-	private ArchivoMesas archivo;
 	private ArrayList<Mesa> listaMesas;
 
 	public Administrador(){
-                this.archivo = new ArchivoMesas();
                 this.listaMesas = llenarMesa();
 	}
 
 	public ArrayList<Mesa> llenarMesa() {
+		ArchivoMesas archivoMesas = new ArchivoMesas();
 		ArrayList<Mesa> lista;
-		if (archivo.esPrimeraVez()) {
+		if (archivoMesas.esPrimeraVez()) {
 			lista = new ArrayList<Mesa>();
 		} else {
-			lista = archivo.leer();
+			lista = archivoMesas.leer();
 		}
 		return lista;
 	}
@@ -47,11 +37,12 @@ public class Administrador {
         }
         
         public void guardarContenido(){
+        	ArchivoMesas archivoMesas = new ArchivoMesas();
             String contenido = "Mesas:\r\n";
             for (int i = 0; i < listaMesas.size(); i++) {	
                 contenido = contenido + "-Mesa "+listaMesas.get(i).getNumero()+";"+listaMesas.get(i).getCapacidad()+";"+listaMesas.get(i).getEstado()+";"+listaMesas.get(i).getConsumo()+"\r\n";
             }
-            archivo.agregarTexto(contenido);
+            archivoMesas.agregarTexto(contenido);
         }
 		
 	public void mostrarMesas(){
