@@ -42,7 +42,7 @@ public class Ventana extends JFrame implements ActionListener {
 		contentPane.add(lblIciresto);
 		
 		JLabel creators = new JLabel("C.Garay, B.Lebrecht, H.Sepulveda (2017)");
-		creators.setBounds(370,650,500,100);
+		creators.setBounds(370,550,500,100);
 		creators.setFont(new Font("Arial Black", Font.PLAIN, 12));
 		creators.setForeground(new Color(218, 165, 32));
 		contentPane.add(creators);

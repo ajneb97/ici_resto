@@ -34,7 +34,7 @@ public class VentanaMesas extends javax.swing.JFrame {
     
     public void configurarTabla(){
         modelo = new DefaultTableModel();
-        modelo.addColumn("N° de Mesa");
+        modelo.addColumn("Nro de Mesa");
         modelo.addColumn("Capacidad");
         modelo.addColumn("Estado");
         modelo.addColumn("Consumo");
@@ -44,26 +44,26 @@ public class VentanaMesas extends javax.swing.JFrame {
         JComboBox comboBoxEstados = new JComboBox(estados);
         TableCellEditor tce = new DefaultCellEditor(comboBoxEstados);
         columnaEstado.setCellEditor(tce);
-        añadirDatos();
+        addDatos();
     }
     
-    public void añadirDatos(){
+    public void addDatos(){
         ArrayList<Mesa> listaMesas = administrador.getListaMesas();
         for(int i=0;i<listaMesas.size();i++){
             int capacidad = listaMesas.get(i).getCapacidad();
             String estado = listaMesas.get(i).getEstado();
             int consumo = listaMesas.get(i).getConsumo();
-            añadirDatosFila(capacidad,estado,consumo);
+            addDatosFila(capacidad,estado,consumo);
         }
     }
     
     public void recargarTabla(){
         modelo.setRowCount(0);
-        añadirDatos();
+        addDatos();
         
     }
     
-    public void añadirDatosFila(int capacidad,String estado,int consumo){
+    public void addDatosFila(int capacidad,String estado,int consumo){
         String[] datos = new String[4];
         datos[0] = modelo.getRowCount()+1+"";
         datos[1] = capacidad+"";
@@ -85,7 +85,7 @@ public class VentanaMesas extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
         botonAgregarMesas = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        botonSalir= new javax.swing.JButton();
         botonGuardarCambios = new javax.swing.JButton();
         botonEliminarMesas = new javax.swing.JButton();
 
@@ -142,11 +142,16 @@ public class VentanaMesas extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setBackground(new java.awt.Color(255, 153, 0));
-        jButton4.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(153, 0, 0));
-        jButton4.setText("Salir");
-
+        botonSalir.setBackground(new java.awt.Color(255, 153, 0));
+        botonSalir.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        botonSalir.setForeground(new java.awt.Color(153, 0, 0));
+        botonSalir.setText("Salir");
+        botonSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonSalirActionPerformed(evt);
+            }
+        });
+        
         botonGuardarCambios.setBackground(new java.awt.Color(255, 153, 0));
         botonGuardarCambios.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         botonGuardarCambios.setForeground(new java.awt.Color(153, 0, 0));
@@ -182,7 +187,7 @@ public class VentanaMesas extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(botonGuardarCambios)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(botonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(35, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -193,7 +198,7 @@ public class VentanaMesas extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botonAgregarMesas)
-                    .addComponent(jButton4)
+                    .addComponent(botonSalir)
                     .addComponent(botonGuardarCambios)
                     .addComponent(botonEliminarMesas))
                 .addContainerGap(47, Short.MAX_VALUE))
@@ -215,13 +220,20 @@ public class VentanaMesas extends javax.swing.JFrame {
 
     private void botonAgregarMesasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAgregarMesasActionPerformed
         administrador.agregarMesa(modelo.getRowCount()+1);
-        añadirDatosFila(0,"LIBRE",0);       
+        addDatosFila(0,"LIBRE",0);       
     }//GEN-LAST:event_botonAgregarMesasActionPerformed
 
     private void tablaAncestorMoved(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_tablaAncestorMoved
         // TODO add your handling code here:
     }//GEN-LAST:event_tablaAncestorMoved
-
+    
+    private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {
+        int reply = JOptionPane.showConfirmDialog(this, "Los datos no guardados se perderán ¿Desea salir de todas formas?", "Precaución", JOptionPane.YES_NO_OPTION);
+         if (reply == JOptionPane.YES_OPTION) {
+            System.exit(0);
+        }
+    }
+    
     private void botonGuardarCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarCambiosActionPerformed
         //Aqui se obtienen todas las mesas y las almacena en la lista de mesas del Administrador
         for(int f=0;f<modelo.getRowCount();f++){
@@ -248,7 +260,7 @@ public class VentanaMesas extends javax.swing.JFrame {
                         if(Integer.valueOf(valor) >= 0){
                            administrador.setConsumoMesa(numeroMesa, Integer.valueOf(valor)); 
                         }else{
-                           JOptionPane.showMessageDialog(this, "La Capacidad de la Mesa "+numeroMesa+" contiene caracteres ilegales. Recuerde usar solo numeros positivos.", "Error al Guardar", JOptionPane.ERROR_MESSAGE);
+                           JOptionPane.showMessageDialog(this, "El Consumo de la Mesa "+numeroMesa+" contiene caracteres ilegales. Recuerde usar solo numeros positivos.", "Error al Guardar", JOptionPane.ERROR_MESSAGE);
                            return; 
                         }
                         
@@ -288,46 +300,12 @@ public class VentanaMesas extends javax.swing.JFrame {
     }//GEN-LAST:event_botonEliminarMesasActionPerformed
 
     
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VentanaMesas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VentanaMesas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VentanaMesas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VentanaMesas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonAgregarMesas;
     private javax.swing.JButton botonEliminarMesas;
     private javax.swing.JButton botonGuardarCambios;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton botonSalir;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabla;
