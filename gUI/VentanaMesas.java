@@ -21,12 +21,10 @@ import javax.swing.table.TableColumn;
  */
 public class VentanaMesas extends javax.swing.JFrame {
     private DefaultTableModel modelo;
-    private Administrador administrador;
     /**
      * Creates new form VentanaMesas
      */
     public VentanaMesas(int x, int y) {
-        administrador = new Administrador();
         initComponents();
         setBounds(x, y, 1024, 768);
         configurarTabla();
@@ -48,6 +46,7 @@ public class VentanaMesas extends javax.swing.JFrame {
     }
     
     public void addDatos(){
+    	Administrador administrador = new Administrador();
         ArrayList<Mesa> listaMesas = administrador.getListaMesas();
         for(int i=0;i<listaMesas.size();i++){
             int capacidad = listaMesas.get(i).getCapacidad();
@@ -219,6 +218,7 @@ public class VentanaMesas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonAgregarMesasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAgregarMesasActionPerformed
+    	Administrador administrador = new Administrador();
         administrador.agregarMesa(modelo.getRowCount()+1);
         addDatosFila(0,"LIBRE",0);       
     }//GEN-LAST:event_botonAgregarMesasActionPerformed
@@ -236,6 +236,7 @@ public class VentanaMesas extends javax.swing.JFrame {
     
     private void botonGuardarCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarCambiosActionPerformed
         //Aqui se obtienen todas las mesas y las almacena en la lista de mesas del Administrador
+    	Administrador administrador = new Administrador();
         for(int f=0;f<modelo.getRowCount();f++){
             int numeroMesa = f+1;
             for(int c=1;c<4;c++){
@@ -283,6 +284,7 @@ public class VentanaMesas extends javax.swing.JFrame {
 
     private void botonEliminarMesasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarMesasActionPerformed
        int hola = tabla.getSelectedRow();
+       Administrador administrador = new Administrador();
        
        //Si el metodo tabla.getSelectedRow() da -1 quiere decir que no hay fila seleccionada
        if(tabla.getRowCount() == 0 || tabla.getSelectedRow() == -1){
