@@ -1,14 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package archivos;
 
 import java.util.ArrayList;
 
 import iciresto.Mesa;
-
+/**
+ * Clase destinada al manejo de archivos contenedores de la informacion de mesas
+ * @author C.Garay,H.Sepúlveda,B.Lebrecht
+ * @version December 2nd 2017
+ */
 public class ArchivoMesas extends Archivo{
 
     public ArchivoMesas() {
@@ -16,9 +15,9 @@ public class ArchivoMesas extends Archivo{
     }  
         
     @Override
-    public ArrayList<Mesa> leer(){
+    public ArrayList<Mesa> listarContenido(){
 	ArrayList<Mesa> listaMesas = new ArrayList<>();
-	String texto=leerArchivo();
+	String texto=leerContenido();
 	String[] mesas = texto.split("-");
 	for(int i=1;i<mesas.length;i++){
             String[] propiedades = mesas[i].split(";");
