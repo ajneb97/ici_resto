@@ -1,30 +1,30 @@
 package archivos;
 
 import java.util.ArrayList;
+/**
+ * Clase destinada al manejo de archivos asociados al manejo de usuarios y login.
+ * @author C.Garay,H.Sepúlveda,B.Lebrecht
+ * @version December 3th 2017
+ */
 
-import archivos.ArchivoLog;
+public class ArchivoLog extends Archivo{
 
-public class Login {
-    private String username;
-    private String password;
-    
-    public Login(String username, String password){
-        this.username = username;
-        this.password = password;
+    public ArchivoLog() {
+        super("src/recursos/login.txt");
     }
-   public boolean usuarioExiste(){
-        String usuario = this.username+";"+this.password;
-     
-        ArchivoLog archLog = new ArchivoLog();
-        if(archLog.esPrimeraVez()) {
-        	archLog.agregarTexto("admin;admin");
-        }
-        ArrayList<String> listaUsuarios = archLog.leer();
-        for(int i=0; i<listaUsuarios.size(); i++){
-          if(usuario.equals(listaUsuarios.get(i))){
-            return true;                
-      }
-      }
-        return false;
+    
+   
+    @Override   
+  
+    public ArrayList<String> listarContenido() {
+        ArrayList<String> listaUsuarios = new ArrayList<>();
+        String texto=leerContenido();
+	String[] usuarios = texto.split("-");
+	for(int i=0;i<usuarios.length;i++){
+            listaUsuarios.add(usuarios[i]);
+             }
+        return listaUsuarios;
     }
 }
+    
+
