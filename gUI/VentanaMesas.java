@@ -188,7 +188,7 @@ public class VentanaMesas extends javax.swing.JFrame implements ActionListener {
 		if (ae.getSource() == botonAgregarMesas) {
 			Administrador administrador = new Administrador();
 			administrador.agregarMesa(modelo.getRowCount() + 1);
-			addDatosFila(1, "LIBRE", 0);
+			addDatosFila(0, "LIBRE", 0);
 		}
 
 		if (ae.getSource() == botonEliminarMesas) {
