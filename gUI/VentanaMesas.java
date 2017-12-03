@@ -228,7 +228,7 @@ public class VentanaMesas extends javax.swing.JFrame {
     }//GEN-LAST:event_tablaAncestorMoved
     
     private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {
-        int reply = JOptionPane.showConfirmDialog(this, "Los datos no guardados se perderÃ¡n Â¿Desea salir de todas formas?", "PrecauciÃ³n", JOptionPane.YES_NO_OPTION);
+        int reply = JOptionPane.showConfirmDialog(this, "Los datos no guardados se perderán ¿Desea salir de todas formas?", "Precaución", JOptionPane.YES_NO_OPTION);
          if (reply == JOptionPane.YES_OPTION) {
             System.exit(0);
         }
