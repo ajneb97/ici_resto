@@ -29,12 +29,12 @@ public abstract class Archivo {
 		return texto;
 	}
 
-	protected boolean esPrimeraVez() {
+	public boolean esPrimeraVez() {
 
 		return Files.notExists(getRuta());
 	}
 	
-	protected void agregarTexto(String texto){
+	public void agregarTexto(String texto){
 		try {
 			Files.write(getRuta(), texto.getBytes());
                          

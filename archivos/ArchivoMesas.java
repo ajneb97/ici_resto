@@ -7,6 +7,8 @@ package archivos;
 
 import java.util.ArrayList;
 
+import iciresto.Mesa;
+
 public class ArchivoMesas extends Archivo{
 
     public ArchivoMesas() {
