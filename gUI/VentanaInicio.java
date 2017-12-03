@@ -1,8 +1,6 @@
 package gUI;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,17 +10,19 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+/**
+ * Clase ventana principal de ICI-Resto, de tipo JFrame, que permite ingresar a traves de un botón.
+ * @author C.Garay,H.Sepúlveda,B.Lebrecht
+ * @version December 3nd 2017
+ */
 
-import iciresto.Administrador;
-
-
-public class Ventana extends JFrame implements ActionListener {
+public class VentanaInicio extends JFrame implements ActionListener {
 	
 	private JPanel contentPane;
 	private JButton btnLogin;
 	
 	
-	public Ventana() {
+	public VentanaInicio() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100,0, 1024, 720);
 		contentPane = new JPanel();
