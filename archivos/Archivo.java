@@ -1,5 +1,6 @@
 package archivos;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -11,18 +12,24 @@ import java.util.ArrayList;
  * @version December 2nd 2017
  */
 
+
+
 public abstract class Archivo {
 	private Path path;
+	protected File directorio;
 
 	/**
 	 * @param path String Ruta del archivo manejado.
 	 */
    protected Archivo(String path){
-            this.path = Paths.get(path);
+	  directorio = new File("src/recursos");
+	  directorio.mkdir();
+	       this.path = Paths.get(path);
     }
      /**
       * @return ruta del archivo manejado.  
       */
+  
 	protected Path getRuta() {
             return this.path;
 	}
