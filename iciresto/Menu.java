@@ -1,12 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package iciresto;
 
 import java.util.Scanner;
-
+/**
+ * @deprecated Solo utilizada en version de consola.
+ * @author C.Garay,H.Sepúlveda,B.Lebrecht
+ * @version November 8th 2017
+ */
 public class Menu {
 	private Administrador adm;
         private Login lg;
@@ -32,7 +31,7 @@ public class Menu {
              do{
                 System.out.println("Ingrese su nombre de usuario:");
                 username = sc.next();
-                System.out.println("Ingrese su contraseña:");
+                System.out.println("Ingrese su contraseÃ±a:");
                  password = sc.next();
                 lg = new Login(username, password);
             }while(lg.usuarioExiste()== false);
@@ -118,15 +117,15 @@ public class Menu {
 	//PREGUNTAS (Solo por orden y para entender mejor el codigo de arriba)
 	
 	private void preguntarNumeroMesa(){
-		System.out.println("¿Que mesa desea editar?");
+		System.out.println("Â¿Que mesa desea editar?");
 	}
 	
 	private void preguntarAtributo(){
-		System.out.println("¿Que atributo desea cambiar? (1.- Capacidad / 2.- Estado / 3.- Consumo");
+		System.out.println("Â¿Que atributo desea cambiar? (1.- Capacidad / 2.- Estado / 3.- Consumo");
 	}
 	
 	private void preguntarEstado(){
-		System.out.println("¿A que estado desea cambiar la mesa? (1.- NO HABILITADA / 2.- LIBRE / 3.- ASIGNADA / 4.- ATENDIDA / 5.- RESERVADA");
+		System.out.println("Â¿A que estado desea cambiar la mesa? (1.- NO HABILITADA / 2.- LIBRE / 3.- ASIGNADA / 4.- ATENDIDA / 5.- RESERVADA");
 	}
 	
 	private void preguntarCapacidad(){
