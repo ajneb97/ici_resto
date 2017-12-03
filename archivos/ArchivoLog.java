@@ -1,23 +1,30 @@
-package archivos;
+package iciresto;
 
 import java.util.ArrayList;
 
+import archivos.ArchivoLog;
 
-public class ArchivoLog extends Archivo{
-
-    public ArchivoLog() {
-        super("src/recursos/login.txt");
+public class Login {
+    private String username;
+    private String password;
+    
+    public Login(String username, String password){
+        this.username = username;
+        this.password = password;
     }
-       
-    public ArrayList<String> leer() {
-        ArrayList<String> listaUsuarios = new ArrayList<>();
-        String texto=leerArchivo();
-	String[] usuarios = texto.split("-");
-	for(int i=0;i<usuarios.length;i++){
-            listaUsuarios.add(usuarios[i]);
-             }
-        return listaUsuarios;
+   public boolean usuarioExiste(){
+        String usuario = this.username+";"+this.password;
+     
+        ArchivoLog archLog = new ArchivoLog();
+        if(archLog.esPrimeraVez()) {
+        	archLog.agregarTexto("admin;admin");
+        }
+        ArrayList<String> listaUsuarios = archLog.leer();
+        for(int i=0; i<listaUsuarios.size(); i++){
+          if(usuario.equals(listaUsuarios.get(i))){
+            return true;                
+      }
+      }
+        return false;
     }
 }
-    
-
