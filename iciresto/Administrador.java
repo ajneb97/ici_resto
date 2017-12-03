@@ -1,40 +1,50 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package iciresto;
 
 import java.util.ArrayList;
 
 import archivos.ArchivoMesas;
-
+/**
+ * Clase destinada al usuario administrador, para manejar informacion relativa a las mesas.
+ * @author C.Garay,H.Sepúlveda,B.Lebrecht
+ * @version December 2nd 2017
+ */
 public class Administrador {
 	private ArrayList<Mesa> listaMesas;
 
 	public Administrador(){
                 this.listaMesas = llenarMesa();
 	}
-
+/**
+ * 
+ * @return ArrayList Lista de mesas
+ */
 	public ArrayList<Mesa> llenarMesa() {
 		ArchivoMesas archivoMesas = new ArchivoMesas();
 		ArrayList<Mesa> lista;
 		if (archivoMesas.esPrimeraVez()) {
 			lista = new ArrayList<Mesa>();
 		} else {
-			lista = archivoMesas.leer();
+			lista = archivoMesas.listarContenido();
 		}
 		return lista;
 	}
 
+	/**
+	 * 
+	 * @param numeroMesa Numero de la mesa
+	 */
 	public void agregarMesa(int numeroMesa) {
 		Mesa miMesa=new Mesa(numeroMesa,0,"LIBRE",0);
 		listaMesas.add(miMesa);
 		guardarContenido();
 	}
-        
-        public void eliminarMesa(int pos){
-            listaMesas.remove(pos);
+       
+	/**
+	 * 
+	 * @param posicion Posicion de la mesa a eliminar del Array
+	 */
+        public void eliminarMesa(int posicion){
+            listaMesas.remove(posicion);
             for(int i=0;i<listaMesas.size();i++){
                 listaMesas.get(i).setNumero(i+1);
             }
@@ -62,6 +72,10 @@ public class Administrador {
 		}
 	}
 	
+	/**
+	 * 
+	 * @return Lista de mesas
+	 */
 	public ArrayList<Mesa> getListaMesas(){
 		return this.listaMesas;
 	}
@@ -78,6 +92,7 @@ public class Administrador {
             
 		listaMesas.get(numeroMesa-1).setEstado(estadoMesa);
 	}
+	
 	
 	public void setCapacidadMesa(int numeroMesa, int capacidadMesa){
 		listaMesas.get(numeroMesa-1).setCapacidad(capacidadMesa);
