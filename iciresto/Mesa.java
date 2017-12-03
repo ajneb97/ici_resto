@@ -1,17 +1,23 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package iciresto;
 
 public class Mesa {
-
+	/**
+	 * Clase que define un objeto Mesa.
+	 * @author C.Garay,H.sepúlveda,B.Lebrecht
+	 * @version November 8th 2017
+	 */
 	private String estado;
 	private int capacidad;
 	private int consumo;
 	private int numero;
 
+	/**
+	 * 
+	 * @param numero int Numero de la mesa
+	 * @param capacidad int Capacidad de personas que tiene la mesa
+	 * @param estado String Estado de la mesa "LIBRE","ASIGNADA","ATENDIDA","RESERVADA","NO HABILITADA"
+	 * @param consumo int consumo total de la mesa
+	 */
 	public Mesa(int numero, int capacidad, String estado, int consumo) {
 		this.numero=numero;
 		this.capacidad = capacidad;
