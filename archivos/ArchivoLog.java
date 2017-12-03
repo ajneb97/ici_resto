@@ -1,4 +1,4 @@
-package archivo;
+package archivos;
 
 import java.util.ArrayList;
 
