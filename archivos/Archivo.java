@@ -1,4 +1,4 @@
-package iciresto;
+package archivos;
 
 
 import java.io.IOException;
