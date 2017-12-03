@@ -1,33 +1,39 @@
 package gUI;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.border.EmptyBorder;
-
-import iciresto.Login;
-
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 
+import iciresto.Login;
+/**
+ * Clase de tipo JDialog, destinada a recibir entradas de texto, con datos del usuario realizando login.
+ * @author C.Garay,H.Sepúlveda,B.Lebrecht
+ *  @version December 2nd 2017
+ */
 public class JDLogin extends JDialog implements ActionListener {
 	
 	private final JPanel contentPanel;
 	private JTextField textField;
 	private JPasswordField textField_1;
 	private JButton btnIngresar;
-	private Ventana ventanaPrincipal;
+	private VentanaInicio ventanaPrincipal;
 
-	public JDLogin(Ventana ventana, boolean b) {
+	/**
+	 * 
+	 * @param ventana Ventana Origen o dueña
+	 * @param b modalidad de JDialog
+	 */
+	public JDLogin(VentanaInicio ventana, boolean b) {
 		super(ventana, b);
 		this.contentPanel = new JPanel();
 		this.ventanaPrincipal = ventana;
@@ -67,9 +73,6 @@ public class JDLogin extends JDialog implements ActionListener {
 		}
 	}
 
-	public JButton getBtnIngresar() {
-		return btnIngresar;
-	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
