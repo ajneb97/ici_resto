@@ -188,7 +188,7 @@ public class VentanaMesas extends javax.swing.JFrame implements ActionListener {
 		if (ae.getSource() == botonAgregarMesas) {
 			Administrador administrador = new Administrador();
 			administrador.agregarMesa(modelo.getRowCount() + 1);
-			addDatosFila(1, "LIBRE", 0);
+			addDatosFila(0, "LIBRE", 0);
 		}
 
 		if (ae.getSource() == botonEliminarMesas) {
@@ -287,12 +287,15 @@ public class VentanaMesas extends javax.swing.JFrame implements ActionListener {
 
 					}
 				}
+                                
 			}
+                        administrador.guardarContenido();
+                        JOptionPane.showMessageDialog(this, "Las Mesas han sido guardadas correctamente.", "Cambios Guardados", JOptionPane.INFORMATION_MESSAGE);
 		}
 
 		if (ae.getSource() == botonSalir) {
 			int reply = JOptionPane.showConfirmDialog(this,
-					"Los datos no guardados se perderán ¿Desea salir de todas formas?", "Precaución",
+					"Los datos no guardados se perderan Â¿Desea salir de todas formas?", "Precaucion",
 					JOptionPane.YES_NO_OPTION);
 			if (reply == JOptionPane.YES_OPTION) {
 				System.exit(0);
