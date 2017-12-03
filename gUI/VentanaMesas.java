@@ -1,10 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package gUI;
-
 import iciresto.Administrador;
 import iciresto.Mesa;
 import java.util.ArrayList;
@@ -25,8 +18,9 @@ public class VentanaMesas extends javax.swing.JFrame {
      * Creates new form VentanaMesas
      */
     public VentanaMesas(int x, int y) {
+    	setResizable(false);
         initComponents();
-        setBounds(x, y, 1024, 768);
+        setBounds(x, y, 1024, 730);
         configurarTabla();
     }
     
@@ -220,7 +214,7 @@ public class VentanaMesas extends javax.swing.JFrame {
     private void botonAgregarMesasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAgregarMesasActionPerformed
     	Administrador administrador = new Administrador();
         administrador.agregarMesa(modelo.getRowCount()+1);
-        addDatosFila(0,"LIBRE",0);       
+        addDatosFila(1,"LIBRE",0);       
     }//GEN-LAST:event_botonAgregarMesasActionPerformed
 
     private void tablaAncestorMoved(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_tablaAncestorMoved
@@ -228,7 +222,7 @@ public class VentanaMesas extends javax.swing.JFrame {
     }//GEN-LAST:event_tablaAncestorMoved
     
     private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {
-        int reply = JOptionPane.showConfirmDialog(this, "Los datos no guardados se perderán ¿Desea salir de todas formas?", "Precaución", JOptionPane.YES_NO_OPTION);
+        int reply = JOptionPane.showConfirmDialog(this, "Los datos no guardados se perderan Â¿Desea salir de todas formas?", "Precaucion", JOptionPane.YES_NO_OPTION);
          if (reply == JOptionPane.YES_OPTION) {
             System.exit(0);
         }
@@ -239,6 +233,7 @@ public class VentanaMesas extends javax.swing.JFrame {
     	Administrador administrador = new Administrador();
         for(int f=0;f<modelo.getRowCount();f++){
             int numeroMesa = f+1;
+            //c1=capacidad, c2=estado, c3=
             for(int c=1;c<4;c++){
                 String valor = modelo.getValueAt(f, c).toString();
                 if(c==1){
@@ -255,9 +250,22 @@ public class VentanaMesas extends javax.swing.JFrame {
                     }
                     
                 }else if(c==2){
+                	if(administrador.getListaMesas().get(numeroMesa-1).getCapacidad()==0 && valor!="NO HABILITADA") {
+                		JOptionPane.showMessageDialog(this, "La mesa "+numeroMesa+" no tiene capacidad, debe encontrarse necesariamente no habilitada", "Error al Guardar", JOptionPane.ERROR_MESSAGE);
+                        return; 
+                	}
                     administrador.setEstadoMesa(numeroMesa, valor);
-                }else{
+                }
+                else{
                     try{
+                    	if(administrador.getListaMesas().get(numeroMesa-1).getEstado()!="ATENDIDA" && Integer.valueOf(valor)>0){
+                    		 JOptionPane.showMessageDialog(this, "La mesa "+numeroMesa+" aun no es atendida, no puede registrarse consumo.", "Error al Guardar", JOptionPane.ERROR_MESSAGE);
+                             return; 
+                    	}
+                       if(administrador.getListaMesas().get(numeroMesa-1).getEstado()=="ATENDIDA" && Integer.valueOf(valor)==0){
+                        		 JOptionPane.showMessageDialog(this, "La mesa "+numeroMesa+" se encuentra atendida, debe registrarse un consumo diferente de 0.", "Error al Guardar", JOptionPane.ERROR_MESSAGE);
+                                 return;  
+                    	}                    	
                         if(Integer.valueOf(valor) >= 0){
                            administrador.setConsumoMesa(numeroMesa, Integer.valueOf(valor)); 
                         }else{
