@@ -3,6 +3,8 @@ package iciresto;
 
 import java.util.ArrayList;
 
+import archivos.ArchivoLog;
+
 public class Login {
     private String username;
     private String password;
