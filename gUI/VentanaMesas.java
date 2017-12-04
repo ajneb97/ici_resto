@@ -290,7 +290,7 @@ public class VentanaMesas extends javax.swing.JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent ae) {
                 
 		if (ae.getSource() == botonAgregarMesas) {
-			addDatosFila(0, "LIBRE", 0);
+			addDatosFila(1, "LIBRE", 0);
 		}
 
 		if (ae.getSource() == botonEliminarMesas) {
