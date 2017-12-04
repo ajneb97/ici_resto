@@ -38,10 +38,6 @@ public class Administrador {
 		listaMesas.add(mesa);
 	}
        
-	/**
-	 * 
-	 * @param posicion Posicion de la mesa a eliminar del Array
-	 */
         public void eliminarMesas(){
             listaMesas.clear();
         }
