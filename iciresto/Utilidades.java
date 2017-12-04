@@ -1,12 +1,13 @@
 package iciresto;
+/**
+ *  @deprecated Solo utilizada en version de consola.
+ * Clase auxiliar, para validar entradas por consola.
+ * @author H.SepÃºlveda.
+ * @version November 8th 2017
+ */
 
 public class Utilidades {
-	/**
-	 *  @deprecated Solo utilizada en version de consola.
-	 * Clase auxiliar, para validar entradas por consola.
-	 * @author H.Sepúlveda.
-	 * @version November 8th 2017
-	 */
+	
 	
 	/**
 	 * 
