@@ -26,33 +26,28 @@ public class Administrador {
 		} else {
 			lista = archivoMesas.listarContenido();
 		}
+                
 		return lista;
 	}
 
 	/**
 	 * 
-	 * @param numeroMesa Numero de la mesa
+	 * @param mesa Mesa a Agregar
 	 */
-	public void agregarMesa(int numeroMesa) {
-		Mesa miMesa=new Mesa(numeroMesa,0,"LIBRE",0);
-		listaMesas.add(miMesa);
-		guardarContenido();
+	public void agregarMesa(Mesa mesa) {
+		listaMesas.add(mesa);
 	}
        
 	/**
 	 * 
 	 * @param posicion Posicion de la mesa a eliminar del Array
 	 */
-        public void eliminarMesa(int posicion){
-            listaMesas.remove(posicion);
-            for(int i=0;i<listaMesas.size();i++){
-                listaMesas.get(i).setNumero(i+1);
-            }
-            guardarContenido();
+        public void eliminarMesas(){
+            listaMesas.clear();
         }
         
         public void guardarContenido(){
-        	ArchivoMesas archivoMesas = new ArchivoMesas();
+            ArchivoMesas archivoMesas = new ArchivoMesas();
             String contenido = "Mesas:\r\n";
             for (int i = 0; i < listaMesas.size(); i++) {	
                 contenido = contenido + "-Mesa "+listaMesas.get(i).getNumero()+";"+listaMesas.get(i).getCapacidad()+";"+listaMesas.get(i).getEstado()+";"+listaMesas.get(i).getConsumo()+"\r\n";
