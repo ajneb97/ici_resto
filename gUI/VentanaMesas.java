@@ -19,7 +19,7 @@ import javax.swing.event.TableModelListener;
 /**
  * Clase Ventana con mesas, de tipo JFrame, destinada al manejo de mesas.
  * 
- * @author C.Garay,H.Sepúlveda,B.Lebrecht
+ * @author C.Garay,H.SepÃºlveda,B.Lebrecht
  * @version December 3nd 2017
  */
 public class VentanaMesas extends javax.swing.JFrame implements ActionListener {
@@ -190,11 +190,12 @@ public class VentanaMesas extends javax.swing.JFrame implements ActionListener {
 
 		pack();
 	}
-        
+     
+	  /**
+	   * Aqui se obtienen todas las mesas y las almacena en la lista de mesas del Administrador
+	   */
         public void guardarCambios(){
-            // Aqui se obtienen todas las mesas y las almacena en la lista de
-	    // mesas
-	    // del Administrador
+         
 			Administrador administrador = new Administrador();
                         
                         //Se eliminan las mesas de la clase Administrador para comenzar a agregarlas nuevamente
@@ -317,7 +318,7 @@ public class VentanaMesas extends javax.swing.JFrame implements ActionListener {
 
 		if (ae.getSource() == botonSalir) {
 			int reply = JOptionPane.showConfirmDialog(this,
-					"Los datos no guardados se perderan ¿Desea salir de todas formas?", "Precaucion",
+					"Los datos no guardados se perderan Â¿Desea salir de todas formas?", "Precaucion",
 					JOptionPane.YES_NO_OPTION);
 			if (reply == JOptionPane.YES_OPTION) {
 				System.exit(0);
