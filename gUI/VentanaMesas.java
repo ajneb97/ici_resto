@@ -13,6 +13,8 @@ import javax.swing.table.TableColumn;
 
 import iciresto.Administrador;
 import iciresto.Mesa;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 
 /**
  * Clase Ventana con mesas, de tipo JFrame, destinada al manejo de mesas.
@@ -69,11 +71,15 @@ public class VentanaMesas extends javax.swing.JFrame implements ActionListener {
 			int consumo = listaMesas.get(i).getConsumo();
 			addDatosFila(capacidad, estado, consumo);
 		}
+                
+                
 	}
 
 	public void recargarTabla() {
-		modelo.setRowCount(0);
-		addDatos();
+                //Se usa para reorganizar el numero de cada mesa
+                for (int f = 0; f < modelo.getRowCount(); f++) {
+                    modelo.setValueAt(""+(f+1), f, 0);
+                }
 
 	}
 
@@ -138,6 +144,7 @@ public class VentanaMesas extends javax.swing.JFrame implements ActionListener {
 		botonSalir.setForeground(new java.awt.Color(153, 0, 0));
 		botonSalir.setText("Salir");
 		botonSalir.addActionListener(this);
+                
 
 		botonGuardarCambios.setBackground(new java.awt.Color(255, 153, 0));
 		botonGuardarCambios.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
@@ -150,6 +157,7 @@ public class VentanaMesas extends javax.swing.JFrame implements ActionListener {
 		botonEliminarMesas.setForeground(new java.awt.Color(153, 0, 0));
 		botonEliminarMesas.setText("Eliminar Mesa");
 		botonEliminarMesas.addActionListener(this);
+               
 
 		javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
 		jPanel1.setLayout(jPanel1Layout);
@@ -182,49 +190,31 @@ public class VentanaMesas extends javax.swing.JFrame implements ActionListener {
 
 		pack();
 	}
-
-	@Override
-	public void actionPerformed(ActionEvent ae) {
-		if (ae.getSource() == botonAgregarMesas) {
+        
+        public void guardarCambios(){
+            // Aqui se obtienen todas las mesas y las almacena en la lista de
+	    // mesas
+	    // del Administrador
 			Administrador administrador = new Administrador();
-			administrador.agregarMesa(modelo.getRowCount() + 1);
-			addDatosFila(0, "LIBRE", 0);
-		}
-
-		if (ae.getSource() == botonEliminarMesas) {
-			Administrador administrador = new Administrador();
-
-			// Si el metodo tabla.getSelectedRow() da -1 quiere decir que no hay
-			// fila seleccionada
-			if (tabla.getRowCount() == 0 || tabla.getSelectedRow() == -1) {
-				JOptionPane.showMessageDialog(this, "No hay ninguna fila seleccionada.", "Error",
-						JOptionPane.ERROR_MESSAGE);
-				return;
-			} else {
-				int fila = tabla.getSelectedRow();
-				modelo.removeRow(fila);
-				administrador.eliminarMesa(fila);
-
-				// Para ordenar nuevamente las filas (Poner sus numeros
-				// correspondientes) hay que recargar la tabla
-				recargarTabla();
-			}
-		}
-
-		if (ae.getSource() == botonGuardarCambios) {
-			// Aqui se obtienen todas las mesas y las almacena en la lista de
-			// mesas
-			// del Administrador
-			Administrador administrador = new Administrador();
+                        
+                        //Se eliminan las mesas de la clase Administrador para comenzar a agregarlas nuevamente
+                        //una vez se clickea el boton de guardar mesas
+                        administrador.eliminarMesas();
+                
 			for (int f = 0; f < modelo.getRowCount(); f++) {
 				int numeroMesa = f + 1;
 				// c1=capacidad, c2=estado, c3=
+                                int capacidad = 0;
+                                String estado = "";
+                                int consumo = 0;
 				for (int c = 1; c < 4; c++) {
 					String valor = modelo.getValueAt(f, c).toString();
+                                        
 					if (c == 1) {
+                                            //Capacidad
 						try {
 							if (Integer.valueOf(valor) >= 0) {
-								administrador.setCapacidadMesa(numeroMesa, Integer.valueOf(valor));
+                                                                capacidad = Integer.valueOf(valor);
 							} else {
 								JOptionPane.showMessageDialog(this,
 										"La Capacidad de la Mesa " + numeroMesa
@@ -241,25 +231,27 @@ public class VentanaMesas extends javax.swing.JFrame implements ActionListener {
 						}
 
 					} else if (c == 2) {
-						if (administrador.getListaMesas().get(numeroMesa - 1).getCapacidad() == 0
-								&& valor != "NO HABILITADA") {
+                                            //Estado
+						if (capacidad == 0
+								&& !valor.equals("NO HABILITADA")) {
 							JOptionPane.showMessageDialog(this,
 									"La mesa " + numeroMesa
 											+ " no tiene capacidad, debe encontrarse necesariamente no habilitada",
 									"Error al Guardar", JOptionPane.ERROR_MESSAGE);
 							return;
 						}
-						administrador.setEstadoMesa(numeroMesa, valor);
+						estado = valor;
 					} else {
+                                            //Consumo
 						try {
-							if (administrador.getListaMesas().get(numeroMesa - 1).getEstado() != "ATENDIDA"
+							if (!estado.equals("ATENDIDA")
 									&& Integer.valueOf(valor) > 0) {
 								JOptionPane.showMessageDialog(this,
 										"La mesa " + numeroMesa + " aun no es atendida, no puede registrarse consumo.",
 										"Error al Guardar", JOptionPane.ERROR_MESSAGE);
 								return;
 							}
-							if (administrador.getListaMesas().get(numeroMesa - 1).getEstado() == "ATENDIDA"
+							if (estado.equals("ATENDIDA")
 									&& Integer.valueOf(valor) == 0) {
 								JOptionPane.showMessageDialog(this,
 										"La mesa " + numeroMesa
@@ -268,7 +260,7 @@ public class VentanaMesas extends javax.swing.JFrame implements ActionListener {
 								return;
 							}
 							if (Integer.valueOf(valor) >= 0) {
-								administrador.setConsumoMesa(numeroMesa, Integer.valueOf(valor));
+								consumo = Integer.valueOf(valor);
 							} else {
 								JOptionPane.showMessageDialog(this,
 										"El Consumo de la Mesa " + numeroMesa
@@ -287,10 +279,40 @@ public class VentanaMesas extends javax.swing.JFrame implements ActionListener {
 
 					}
 				}
-                                
+                                Mesa mesa = new Mesa(numeroMesa,capacidad,estado,consumo);
+                                administrador.agregarMesa(mesa);
 			}
                         administrador.guardarContenido();
                         JOptionPane.showMessageDialog(this, "Las Mesas han sido guardadas correctamente.", "Cambios Guardados", JOptionPane.INFORMATION_MESSAGE);
+        }
+
+	@Override
+	public void actionPerformed(ActionEvent ae) {
+                
+		if (ae.getSource() == botonAgregarMesas) {
+			addDatosFila(0, "LIBRE", 0);
+		}
+
+		if (ae.getSource() == botonEliminarMesas) {
+                        
+                        // Si el metodo tabla.getSelectedRow() da -1 quiere decir que no hay
+			// fila seleccionada
+			if (tabla.getRowCount() == 0 || tabla.getSelectedRow() == -1) {
+				JOptionPane.showMessageDialog(this, "No hay ninguna fila seleccionada.", "Error",
+						JOptionPane.ERROR_MESSAGE);
+				return;
+			} else {
+				int fila = tabla.getSelectedRow();
+				modelo.removeRow(fila);
+
+				// Para ordenar nuevamente las filas (Poner sus numeros
+				// correspondientes) hay que recargar la tabla
+				recargarTabla();
+			}
+		}
+
+		if (ae.getSource() == botonGuardarCambios) {
+                    guardarCambios();
 		}
 
 		if (ae.getSource() == botonSalir) {
