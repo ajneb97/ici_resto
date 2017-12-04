@@ -56,7 +56,7 @@ public class Menu {
 						editarMesas();
 						break;
 					case 3:
-						adm.agregarMesa(adm.getNumeroMesas()+1);
+						//adm.agregarMesa(adm.getNumeroMesas()+1);
 						break;
 					case 4:
 						System.exit(0);
